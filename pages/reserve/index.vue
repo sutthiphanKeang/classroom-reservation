@@ -1,5 +1,5 @@
 <template>
-  <v-container><Reserveheader /></v-container>
+  <v-container><reserve-header /></v-container>
 </template>
 
 <script>

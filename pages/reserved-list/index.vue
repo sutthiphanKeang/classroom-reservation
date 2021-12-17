@@ -1,9 +1,9 @@
 <template>
-  <v-container><Reservelistheader /></v-container>
+  <v-container><reserve-list-header /></v-container>
 </template>
 
-<script>
-export default {}
-</script>
+<script></script>
 
 <style></style>
+
+ReserveHeader
