@@ -41,8 +41,14 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/axios',
   ],
-
+  axios: {
+    baseURL: process.env.endpoint,
+  },
+  env: {
+    endpoint: process.env.endpoint,
+  },
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
