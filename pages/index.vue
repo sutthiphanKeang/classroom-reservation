@@ -61,15 +61,12 @@
                 <v-list-item @click="type = 'day'">
                   <v-list-item-title>Day</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="type = 'week'">
-                  <v-list-item-title>Week</v-list-item-title>
-                </v-list-item>
+                
                 <v-list-item @click="type = 'month'">
                   <v-list-item-title>Month</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="type = '4day'">
-                  <v-list-item-title>4 days</v-list-item-title>
-                </v-list-item>
+                
+                
               </v-list>
             </v-menu>
           </v-toolbar>
@@ -140,16 +137,16 @@
       type: 'month',
       typeToLabel: {
         month: 'Month',
-        week: 'Week',
+        
         day: 'Day',
-        '4day': '4 Days',
+        
       },
       selectedEvent: {},
       selectedElement: null,
       selectedOpen: false,
       events: [],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-      names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+      colors: [],
+      names: [],
     }),
     mounted () {
       this.$refs.calendar.checkChange()
@@ -202,13 +199,7 @@
           const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
           const second = new Date(first.getTime() + secondTimestamp)
 
-          events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
-            start: first,
-            end: second,
-            color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: !allDay,
-          })
+          
         }
 
         this.events = events
