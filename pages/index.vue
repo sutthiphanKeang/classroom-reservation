@@ -61,9 +61,12 @@
                 <v-list-item @click="type = 'day'">
                   <v-list-item-title>Day</v-list-item-title>
                 </v-list-item>
+                
                 <v-list-item @click="type = 'month'">
                   <v-list-item-title>Month</v-list-item-title>
                 </v-list-item>
+                
+                
               </v-list>
             </v-menu>
           </v-toolbar>
@@ -134,9 +137,9 @@
       type: 'month',
       typeToLabel: {
         month: 'Month',
-        week: 'Week',
+        
         day: 'Day',
-        '4day': '4 Days',
+        
       },
       selectedEvent: {},
       selectedElement: null,
@@ -196,7 +199,7 @@
           const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
           const second = new Date(first.getTime() + secondTimestamp)
 
-         
+          
         }
 
         this.events = events

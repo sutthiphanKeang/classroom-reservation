@@ -1,9 +1,11 @@
 <template>
-  <v-container><reserve-header /></v-container>
+  <v-container class="box">
+    <reserve-room />
+  </v-container>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
