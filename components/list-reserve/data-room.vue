@@ -87,7 +87,7 @@ export default {
       {
         id: 'CSB202',
         name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
+        date: '25/01/22',
         time: 'ใส่เวลาเด้อพี่',
       },
       {
