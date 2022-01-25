@@ -71,7 +71,7 @@
             </v-menu>
           </v-toolbar>
         </v-sheet>
-        <v-sheet height="600">
+        <v-sheet height="402">
           <v-calendar
             ref="calendar"
             v-model="focus"

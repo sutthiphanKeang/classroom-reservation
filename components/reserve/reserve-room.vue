@@ -17,7 +17,7 @@
       </v-row>
     </v-card-title>
     <div class="mt-2 p-flex align-center">
-      <v-virtual-scroll height="720" item-height="100" :items="rooms">
+      <v-virtual-scroll height="402" item-height="100" :items="rooms">
         <template v-slot:default="{ item }">
           <v-list-item :key="item">
             <div class="room d-flex align-center">
@@ -38,7 +38,7 @@
                   large 
                   color="primary"
                 >
-                  จองส์
+                  จอง
                   <v-icon right> mdi-open-in-new </v-icon>
                 </v-btn>
               </v-list-item-action>
@@ -121,10 +121,27 @@
                   append-icon="mdi-clock"
                   menu-props="auto"
                   hide-details
+                  multiple
                   label="Time"
                   outlined
                   dense
                 ></v-select>
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col>
+                <v-text-field
+                  label="Password"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Confirm Password"
+                  outlined
+                  dense
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-row dense>
@@ -136,6 +153,8 @@
                 ></v-textarea>
               </v-col>
             </v-row>
+             
+            
           </v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -186,7 +205,7 @@ export default {
     dialog: false,
     menu: false,
     snackbar: false,
-    time:["8.00-9.30","9.30-11.00","11.00-12.30","12.30-14.00"],
+    time:["08.00-9.30","09.30-11.00","11.00-12.30","12.30-14.00","14.00-15.30","15.30-17.00"],
     rooms: [
       {
         id: 'CSB202',
