@@ -1,6 +1,6 @@
 <template>
   <v-container class="box">
-    <reserve-room />
+    <reserve-search />
   </v-container>
 </template>
 

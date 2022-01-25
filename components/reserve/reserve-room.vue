@@ -1,23 +1,8 @@
 <template>
   <v-card class="room-card">
-    <v-card-title>
-      <v-row>
-        <v-col align-self="center">
-          ห้อง
-        </v-col>
-        <v-col align-self="center">
-          <v-text-field
-            label="Search"
-            outlined
-            dense
-            hide-details
-            append-icon="mdi-magnify"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-card-title>
+    <v-card-title> Classroom </v-card-title>
     <div class="mt-2 p-flex align-center">
-      <v-virtual-scroll height="402" item-height="100" :items="rooms">
+      <v-virtual-scroll height="466" item-height="100" :items="rooms">
         <template v-slot:default="{ item }">
           <v-list-item :key="item">
             <div class="room d-flex align-center">
@@ -32,12 +17,7 @@
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-btn 
-                  @click="dialog = true"
-                  outlined 
-                  large 
-                  color="primary"
-                >
+                <v-btn @click="dialog = true" outlined large color="primary">
                   จอง
                   <v-icon right> mdi-open-in-new </v-icon>
                 </v-btn>
@@ -46,10 +26,7 @@
           </v-list-item>
         </template>
       </v-virtual-scroll>
-      <v-dialog
-        v-model="dialog"
-        width="600px"
-      >
+      <v-dialog v-model="dialog" width="600px">
         <v-card>
           <v-card-title>
             <span class="text-h5">Reserve Detail</span>
@@ -57,34 +34,18 @@
           <v-container>
             <v-row dense>
               <v-col>
-                <v-text-field
-                  label="Firstname"
-                  outlined
-                  dense
-                ></v-text-field>
+                <v-text-field label="Firstname" outlined dense></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field
-                  label="Lastname"
-                  outlined
-                  dense
-                ></v-text-field>
+                <v-text-field label="Lastname" outlined dense></v-text-field>
               </v-col>
             </v-row>
             <v-row dense>
               <v-col>
-                <v-text-field
-                  label="Email"
-                  outlined
-                  dense
-                ></v-text-field>
+                <v-text-field label="Email" outlined dense></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field
-                  label="Phone No."
-                  outlined
-                  dense
-                ></v-text-field>
+                <v-text-field label="Phone No." outlined dense></v-text-field>
               </v-col>
             </v-row>
             <v-row dense>
@@ -130,11 +91,7 @@
             </v-row>
             <v-row dense>
               <v-col>
-                <v-text-field
-                  label="Password"
-                  outlined
-                  dense
-                ></v-text-field>
+                <v-text-field label="Password" outlined dense></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field
@@ -146,56 +103,32 @@
             </v-row>
             <v-row dense>
               <v-col>
-                <v-textarea
-                  auto-grow
-                  outlined
-                  label="Description"
-                ></v-textarea>
+                <v-textarea auto-grow outlined label="Description"></v-textarea>
               </v-col>
             </v-row>
-             
-            
           </v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="blue darken-1"
-              text
-              @click="dialog = false"
-            >
+            <v-btn color="blue darken-1" text @click="dialog = false">
               Close
             </v-btn>
-            <v-btn
-              color="blue darken-1"
-              text
-              @click="confirm()"
-            >
+            <v-btn color="blue darken-1" text @click="confirm()">
               Confirm
             </v-btn>
           </v-card-actions>
-          
         </v-card>
       </v-dialog>
-      
     </div>
-    <v-snackbar
-      v-model="snackbar"
-    >
+    <v-snackbar v-model="snackbar">
       Success!!!
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
     </v-snackbar>
   </v-card>
-  
 </template>
 
 <script>
@@ -205,7 +138,14 @@ export default {
     dialog: false,
     menu: false,
     snackbar: false,
-    time:["08.00-9.30","09.30-11.00","11.00-12.30","12.30-14.00","14.00-15.30","15.30-17.00"],
+    time: [
+      '08.00-9.30',
+      '09.30-11.00',
+      '11.00-12.30',
+      '12.30-14.00',
+      '14.00-15.30',
+      '15.30-17.00',
+    ],
     rooms: [
       {
         id: 'CSB202',
@@ -310,10 +250,11 @@ export default {
     ],
   }),
   methods: {
-    confirm(){
-      this.snackbar = true;
-      this.dialog = false;
-  }} 
+    confirm() {
+      this.snackbar = true
+      this.dialog = false
+    },
+  },
 }
 </script>
 

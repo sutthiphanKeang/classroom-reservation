@@ -3,15 +3,6 @@
     <v-row>
       <v-col align-self="center">
         <v-text-field
-          label="Name"
-          outlined
-          dense
-          hide-details
-          append-icon="mdi-account"
-        ></v-text-field>
-      </v-col>
-      <v-col align-self="center">
-        <v-text-field
           label="Room"
           outlined
           dense
@@ -59,25 +50,21 @@
           dense
         ></v-select>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-btn color="primary" width="100%" text-align="center">
-          Search
-          <v-icon>mdi-magnify</v-icon>
+      <v-col cols="1">
+        <v-btn color="primary" text-align="center">
+          <v-icon> mdi-magnify </v-icon>
         </v-btn>
       </v-col>
     </v-row>
-    
-    <DataRoom class = 'mt-7' />
-    
+
+    <ReserveRoom class="mt-7" />
   </v-container>
 </template>
 
 <script>
-import DataRoom from './data-room.vue'
+import ReserveRoom from './reserve-room.vue'
 export default {
-  components: { DataRoom },
+  components: { ReserveRoom },
   data: () => ({
     time: [
       '08.00-9.30',
