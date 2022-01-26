@@ -50,9 +50,22 @@
           dense
         ></v-select>
       </v-col>
-      <v-col cols="1">
-        <v-btn color="primary" text-align="center">
-          <v-icon> mdi-magnify </v-icon>
+      <v-col>
+        <v-select
+          :items="type"
+          menu-props="auto"
+          hide-details
+          label="Type"
+          outlined
+          dense
+        ></v-select>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn color="primary" width="100%" text-align="center">
+          Search
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -74,6 +87,7 @@ export default {
       '14.00-15.30',
       '15.30-17.00',
     ],
+    type: ['Lecture', 'Labatory'],
   }),
   computed: {
     items() {

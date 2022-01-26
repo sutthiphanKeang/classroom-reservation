@@ -2,7 +2,7 @@
   <v-card class="room-card">
     <v-card-title> Classroom </v-card-title>
     <div class="mt-2 p-flex align-center">
-      <v-virtual-scroll height="466" item-height="100" :items="rooms">
+      <v-virtual-scroll height="408" item-height="100" :items="rooms">
         <template v-slot:default="{ item }">
           <v-list-item :key="item">
             <div class="room d-flex align-center">
@@ -12,13 +12,16 @@
                   Room <strong>ID {{ item.id }}</strong>
                 </v-list-item-title>
                 <v-list-item-title class="pl-4">
-                  ขนาด <strong>30</strong> คน
+                  Type <strong> {{ item.type }}</strong>
+                </v-list-item-title>
+                <v-list-item-title class="pl-4">
+                  Capacity <strong> {{ item.capacity }}</strong> seats
                 </v-list-item-title>
               </v-list-item-content>
 
               <v-list-item-action>
                 <v-btn @click="dialog = true" outlined large color="primary">
-                  จอง
+                  Reserve
                   <v-icon right> mdi-open-in-new </v-icon>
                 </v-btn>
               </v-list-item-action>
@@ -148,105 +151,78 @@ export default {
     ],
     rooms: [
       {
-        id: 'CSB202',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB203',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB204',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
         id: 'CSB100',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '104',
       },
       {
-        id: 'CSB303',
+        id: 'CSB201',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '25',
       },
       {
         id: 'CSB202',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '25',
       },
       {
         id: 'CSB203',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '20',
       },
       {
-        id: 'CSB204',
+        id: 'CSB207',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '30',
       },
       {
-        id: 'CSB100',
+        id: 'CSB209',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '35',
       },
       {
-        id: 'CSB303',
+        id: 'CSB210',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Lecture',
+        capacity: '38',
       },
       {
-        id: 'CSB202',
+        id: 'CSB301',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB203',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB204',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB100',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Labatory',
+        capacity: '40',
       },
       {
         id: 'CSB303',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Labatory',
+        capacity: '22',
       },
       {
-        id: 'CSB202',
+        id: 'CSB307',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Labatory',
+        capacity: '70',
       },
       {
-        id: 'CSB203',
+        id: 'CSB308',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Labatory',
+        capacity: '30',
       },
       {
-        id: 'CSB204',
+        id: 'CSB309',
         pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
+        type: 'Labatory',
+        capacity: '10',
       },
-      {
-        id: 'CSB100',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB303',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB202',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB203',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB204',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB100',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
-      {
-        id: 'CSB303',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-      },
+      ,
     ],
   }),
   methods: {

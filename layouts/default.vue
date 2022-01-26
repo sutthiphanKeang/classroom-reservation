@@ -3,7 +3,7 @@
     <v-toolbar app class="flex-grow-0 pr-0" dark>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">
-          ระบบจองห้องเรียน
+          Classroom Reservation
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -23,17 +23,17 @@ export default {
   data: () => ({
     menuItems: [
       {
-        title: 'หน้าหลัก',
+        title: 'Home',
         path: '/',
         icon: 'mdi-home',
       },
       {
-        title: 'จองห้องเรียน',
+        title: 'Classroom',
         path: '/reserve',
         icon: 'mdi-google-classroom',
       },
       {
-        title: 'รายการ',
+        title: 'Reservation List',
         path: '/reserved-list',
         icon: 'mdi-format-list-bulleted',
       },

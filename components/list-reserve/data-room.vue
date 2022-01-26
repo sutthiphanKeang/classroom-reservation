@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title> รายการจอง </v-card-title>
+      <v-card-title> Reservation List </v-card-title>
       <div class="mt-2 p-flex align-center">
         <v-virtual-scroll height="408" item-height="100" :items="rooms">
           <template v-slot:default="{ item }">
@@ -32,7 +32,7 @@
                         large
                         color="error"
                       >
-                        ยกเลิก
+                        Cancel
                         <v-icon right> mdi-open-in-new </v-icon>
                       </v-btn>
                     </v-col>
@@ -46,7 +46,7 @@
     </v-card>
     <v-dialog v-model="dialog" width="600px">
       <v-card>
-        <v-card-title> ยืนยันการยกเลิก </v-card-title>
+        <v-card-title> Confirm Cancelation </v-card-title>
         <v-text-field label="Password" outlined dense class="pa-4">
         </v-text-field>
         <v-card-actions>
@@ -85,13 +85,13 @@ export default {
     ],
     rooms: [
       {
-        id: 'CSB202',
+        id: 'CSB100',
         name: 'Sutthiphan P.',
         date: 'ใส่วันน่ะจ้ะ',
         time: 'ใส่เวลาเด้อพี่',
       },
       {
-        id: 'CSB203',
+        id: 'CSB201',
         name: 'Sutthiphan P.',
         date: 'ใส่วันน่ะจ้ะ',
         time: 'ใส่เวลาเด้อพี่',
@@ -103,7 +103,7 @@ export default {
         time: 'ใส่เวลาเด้อพี่',
       },
       {
-        id: 'CSB100',
+        id: 'CSB207',
         name: 'Sutthiphan P.',
         date: 'ใส่วันน่ะจ้ะ',
         time: 'ใส่เวลาเด้อพี่',
@@ -152,84 +152,6 @@ export default {
       },
       {
         id: 'CSB203',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB204',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB100',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB303',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB202',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB203',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB204',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB100',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB303',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB202',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB203',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB204',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB100',
-        name: 'Sutthiphan P.',
-        date: 'ใส่วันน่ะจ้ะ',
-        time: 'ใส่เวลาเด้อพี่',
-      },
-      {
-        id: 'CSB303',
         name: 'Sutthiphan P.',
         date: 'ใส่วันน่ะจ้ะ',
         time: 'ใส่เวลาเด้อพี่',
