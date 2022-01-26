@@ -80,14 +80,14 @@ export default {
   components: { ReserveRoom },
   data: () => ({
     time: [
-      '08.00-9.30',
+      '08.00-09.30',
       '09.30-11.00',
       '11.00-12.30',
       '12.30-14.00',
       '14.00-15.30',
       '15.30-17.00',
     ],
-    type: ['Lecture', 'Labatory'],
+    type: ['Lecture', 'Laboratory'],
   }),
   computed: {
     items() {
