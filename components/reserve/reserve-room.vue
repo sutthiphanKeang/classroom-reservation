@@ -6,16 +6,21 @@
         <template v-slot:default="{ item }">
           <v-list-item :key="item">
             <div class="room d-flex align-center">
-              <img class="roompic" width="150" height="90" :src="item.pic" />
+              <img
+                class="roompic"
+                width="150"
+                height="90"
+                :src="roomImage(item.image)"
+              />
               <v-list-item-content>
                 <v-list-item-title class="pl-4">
-                  Room <strong>ID {{ item.id }}</strong>
+                  Room <strong> {{ item.number }}</strong>
                 </v-list-item-title>
                 <v-list-item-title class="pl-4">
                   Type <strong> {{ item.type }}</strong>
                 </v-list-item-title>
                 <v-list-item-title class="pl-4">
-                  Capacity <strong> {{ item.capacity }}</strong> seats
+                  Capacity <strong> {{ item.quantity }}</strong> seats
                 </v-list-item-title>
               </v-list-item-content>
 
@@ -124,7 +129,6 @@
     </div>
     <v-snackbar v-model="snackbar">
       Success!!!
-
       <template v-slot:action="{ attrs }">
         <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
@@ -149,86 +153,22 @@ export default {
       '14.00-15.30',
       '15.30-17.00',
     ],
-    rooms: [
-      {
-        id: 'CSB100',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '104',
-      },
-      {
-        id: 'CSB201',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '25',
-      },
-      {
-        id: 'CSB202',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '25',
-      },
-      {
-        id: 'CSB203',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '20',
-      },
-      {
-        id: 'CSB207',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '30',
-      },
-      {
-        id: 'CSB209',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '35',
-      },
-      {
-        id: 'CSB210',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Lecture',
-        capacity: '38',
-      },
-      {
-        id: 'CSB301',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Labatory',
-        capacity: '40',
-      },
-      {
-        id: 'CSB303',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Labatory',
-        capacity: '22',
-      },
-      {
-        id: 'CSB307',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Labatory',
-        capacity: '70',
-      },
-      {
-        id: 'CSB308',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Labatory',
-        capacity: '30',
-      },
-      {
-        id: 'CSB309',
-        pic: 'https://www.cs.science.cmu.ac.th/wp-content/uploads/2020/08/116837622_3250975954946134_5698865583461347309_o.jpg',
-        type: 'Labatory',
-        capacity: '10',
-      },
-      ,
-    ],
+    rooms: [],
   }),
+  mounted() {
+    this.getAllRooms()
+  },
   methods: {
     confirm() {
       this.snackbar = true
       this.dialog = false
+    },
+    async getAllRooms() {
+      this.rooms = await this.$axios.$get('/rooms/all')
+    },
+
+    roomImage(name) {
+      return `${process.env.endpoint}rooms/room-image/${name}`
     },
   },
 }
