@@ -10,7 +10,7 @@
       </div>
     </div>
     <v-date-picker v-model="picker" dark full-width></v-date-picker>
-    
+
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.75);
   border: 1px solid darkgrey;
   border-radius: 7px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-top: 8px;
 }
 </style>
