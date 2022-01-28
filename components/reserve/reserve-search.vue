@@ -33,8 +33,7 @@
           </template>
           <v-date-picker
             ref="picker"
-            :max="new Date().toISOString().substr(0, 10)"
-            min="1950-01-01"
+            :min="dayjs().add(1, 'day').toISOString().substr(0, 10)"
           ></v-date-picker>
         </v-menu>
       </v-col>
@@ -76,6 +75,7 @@
 
 <script>
 import ReserveRoom from './reserve-room.vue'
+import dayjs from 'dayjs'
 export default {
   components: { ReserveRoom },
   data: () => ({
@@ -96,6 +96,9 @@ export default {
     length() {
       return 20
     },
+  },
+  methods: {
+    dayjs,
   },
 }
 </script>
