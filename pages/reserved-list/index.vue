@@ -1,5 +1,5 @@
 <template>
-  <v-container><list-reserve /></v-container>
+  <v-container fluid><list-reserve /></v-container>
 </template>
 
 <script></script>

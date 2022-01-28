@@ -1,5 +1,5 @@
 <template>
-  <v-container class="box">
+  <v-container fluid class="box">
     <reserve-search />
   </v-container>
 </template>

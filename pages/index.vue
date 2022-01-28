@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row class="block1">
       <v-col cols="3">
         <home-calendar />
