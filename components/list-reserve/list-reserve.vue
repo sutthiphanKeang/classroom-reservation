@@ -68,9 +68,8 @@
         </v-btn>
       </v-col>
     </v-row>
-    
-    <DataRoom class = 'mt-7' />
-    
+
+    <DataRoom class="mt-7" />
   </v-container>
 </template>
 
