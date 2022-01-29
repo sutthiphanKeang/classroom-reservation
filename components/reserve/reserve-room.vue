@@ -25,7 +25,12 @@
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-btn @click="dialog = true" outlined large color="primary">
+                <v-btn
+                  @click="setFocusData(item._id)"
+                  outlined
+                  large
+                  color="primary"
+                >
                   Reserve
                   <v-icon right> mdi-open-in-new </v-icon>
                 </v-btn>
@@ -34,6 +39,7 @@
           </v-list-item>
         </template>
       </v-virtual-scroll>
+
       <v-dialog v-model="dialog" width="600px">
         <v-card>
           <v-card-title>
@@ -42,18 +48,38 @@
           <v-container>
             <v-row dense>
               <v-col>
-                <v-text-field label="Firstname" outlined dense></v-text-field>
+                <v-text-field
+                  label="Firstname"
+                  outlined
+                  dense
+                  v-model="details.firstName"
+                ></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field label="Lastname" outlined dense></v-text-field>
+                <v-text-field
+                  label="Lastname"
+                  outlined
+                  dense
+                  v-model="details.lastName"
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-row dense>
               <v-col>
-                <v-text-field label="Email" outlined dense></v-text-field>
+                <v-text-field
+                  label="Email"
+                  outlined
+                  dense
+                  v-model="details.email"
+                ></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field label="Phone No." outlined dense></v-text-field>
+                <v-text-field
+                  label="Phone No."
+                  outlined
+                  dense
+                  v-model="details.phone"
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-row dense>
@@ -68,6 +94,7 @@
                 >
                   <template #activator="{ on, attrs }">
                     <v-text-field
+                      v-model="date"
                       label="Date"
                       append-icon="mdi-calendar"
                       outlined
@@ -78,15 +105,16 @@
                     ></v-text-field>
                   </template>
                   <v-date-picker
+                    v-model="date"
                     ref="picker"
-                    :max="new Date().toISOString().substr(0, 10)"
-                    min="1950-01-01"
+                    :min="dayjs().add(1, 'day').toISOString().substr(0, 10)"
                   ></v-date-picker>
                 </v-menu>
               </v-col>
               <v-col>
                 <v-select
-                  :items="time"
+                  v-model="periods"
+                  :items="freeTime"
                   append-icon="mdi-clock"
                   menu-props="auto"
                   hide-details
@@ -117,10 +145,10 @@
           </v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
+            <v-btn color="error darken-1" text @click="dialog = false">
               Close
             </v-btn>
-            <v-btn color="blue darken-1" text @click="confirm()">
+            <v-btn color="primary darken-1" text @click="confirm()">
               Confirm
             </v-btn>
           </v-card-actions>
@@ -139,30 +167,47 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
   data: () => ({
     benched: 0,
     dialog: false,
     menu: false,
     snackbar: false,
-    time: [
-      '08.00-9.30',
-      '09.30-11.00',
-      '11.00-12.30',
-      '12.30-14.00',
-      '14.00-15.30',
-      '15.30-17.00',
-    ],
+    date: null,
+    focusRoomId: '',
+    details: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmpassword: '',
+      description: '',
+    },
+    freeTime: [],
     rooms: [],
+    periods: [],
   }),
+
   mounted() {
     this.getAllRooms()
   },
+
+  watch: {
+    date(next) {
+      if (next && this.focusRoomId != '') {
+        this.getFreeTime()
+      }
+    },
+  },
+
   methods: {
     confirm() {
       this.snackbar = true
       this.dialog = false
     },
+
     async getAllRooms() {
       this.rooms = await this.$axios.$get('/rooms/all')
     },
@@ -170,6 +215,19 @@ export default {
     roomImage(name) {
       return `${process.env.endpoint}rooms/room-image/${name}`
     },
+
+    setFocusData(id) {
+      this.dialog = true
+      this.focusRoomId = id
+    },
+
+    async getFreeTime() {
+      this.freeTime = await this.$axios.$get('/reserve/freeTime', {
+        id: this.focusRoomId,
+        date: this.date,
+      })
+    },
+    dayjs,
   },
 }
 </script>
