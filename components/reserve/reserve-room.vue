@@ -129,17 +129,23 @@
               <v-col>
                 <v-text-field
                   v-model="password"
+                  :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show ? 'text' : 'password'"
                   label="Password"
                   outlined
                   dense
+                  @click:append="show = !show"
                 ></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field
                   v-model="confirmPassword"
+                  :append-icon="showCon ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="showCon ? 'text' : 'password'"
                   label="Confirm Password"
                   outlined
                   dense
+                  @click:append="showCon = !showCon"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -186,6 +192,8 @@ export default {
     menu: false,
     snackbar: false,
     snackbarMessage: '',
+    show: false,
+    showCon: false,
     date: null,
     focusRoomId: '',
     firstName: '',
