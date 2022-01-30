@@ -52,7 +52,7 @@
                   label="Firstname"
                   outlined
                   dense
-                  v-model="details.firstName"
+                  v-model="firstName"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -60,7 +60,7 @@
                   label="Lastname"
                   outlined
                   dense
-                  v-model="details.lastName"
+                  v-model="lastName"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -70,7 +70,7 @@
                   label="Email"
                   outlined
                   dense
-                  v-model="details.email"
+                  v-model="email"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -78,7 +78,7 @@
                   label="Phone No."
                   outlined
                   dense
-                  v-model="details.phone"
+                  v-model="phone"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -113,7 +113,7 @@
               </v-col>
               <v-col>
                 <v-select
-                  v-model="periods"
+                  v-model="selectedTime"
                   :items="freeTime"
                   append-icon="mdi-clock"
                   menu-props="auto"
@@ -127,10 +127,16 @@
             </v-row>
             <v-row dense>
               <v-col>
-                <v-text-field label="Password" outlined dense></v-text-field>
+                <v-text-field
+                  v-model="password"
+                  label="Password"
+                  outlined
+                  dense
+                ></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field
+                  v-model="confirmPassword"
                   label="Confirm Password"
                   outlined
                   dense
@@ -139,7 +145,12 @@
             </v-row>
             <v-row dense>
               <v-col>
-                <v-textarea auto-grow outlined label="Description"></v-textarea>
+                <v-textarea
+                  v-model="description"
+                  auto-grow
+                  outlined
+                  label="Description"
+                ></v-textarea>
               </v-col>
             </v-row>
           </v-container>
@@ -156,7 +167,7 @@
       </v-dialog>
     </div>
     <v-snackbar v-model="snackbar">
-      Success!!!
+      {{ snackbarMessage }}
       <template v-slot:action="{ attrs }">
         <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
@@ -174,20 +185,19 @@ export default {
     dialog: false,
     menu: false,
     snackbar: false,
+    snackbarMessage: '',
     date: null,
     focusRoomId: '',
-    details: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      password: '',
-      confirmpassword: '',
-      description: '',
-    },
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+    description: '',
     freeTime: [],
     rooms: [],
-    periods: [],
+    selectedTime: [],
   }),
 
   mounted() {
@@ -200,12 +210,35 @@ export default {
         this.getFreeTime()
       }
     },
+    focusRoomId(next) {
+      if (next && this.date != null) {
+        this.getFreeTime()
+      }
+    },
   },
 
   methods: {
-    confirm() {
-      this.snackbar = true
+    async confirm() {
+      const data = {
+        roomId: this.focusRoomId,
+        by: `${this.firstName} ${this.lastName}`,
+        date: this.date,
+        time: this.selectedTime,
+        description: this.description,
+        password: this.password,
+        phone: this.phone,
+        email: this.email,
+      }
+      await this.createReserve(data)
       this.dialog = false
+      this.snackbar = true
+      this.focusRoomId = ''
+      this.date = null
+    },
+
+    async createReserve(reaserveData) {
+      const reserveResult = await this.$axios.$post('/reserve', reaserveData)
+      this.snackbarMessage = reserveResult
     },
 
     async getAllRooms() {
