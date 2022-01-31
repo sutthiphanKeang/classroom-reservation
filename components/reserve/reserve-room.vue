@@ -1,7 +1,7 @@
 <template>
-  <v-card class="room-card">
-    <v-card-title> Classroom </v-card-title>
-    <div class="mt-2 p-flex align-center">
+  <div>
+    <h2>Classroom List</h2>
+    <v-card class="room-card">
       <v-virtual-scroll height="408" item-height="100" :items="rooms">
         <template v-slot:default="{ item }">
           <v-list-item :key="item">
@@ -171,16 +171,16 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </div>
-    <v-snackbar v-model="snackbar">
-      {{ snackbarMessage }}
-      <template v-slot:action="{ attrs }">
-        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-  </v-card>
+      <v-snackbar v-model="snackbar">
+        {{ snackbarMessage }}
+        <template v-slot:action="{ attrs }">
+          <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </v-card>
+  </div>
 </template>
 
 <script>

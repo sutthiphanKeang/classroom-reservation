@@ -1,61 +1,19 @@
 <template>
   <div>
-    <v-card>
-      <v-card-title> Reservation List </v-card-title>
-      <div class="mt-2 p-flex align-center">
-        <v-virtual-scroll height="408" item-height="100" :items="reserved">
-          <template v-slot:default="{ item }">
-            <v-list-item :key="item">
-              <v-list-item-content class="item pl-4"
-                ><v-row>
-                  <v-col
-                    ><v-row
-                      ><v-col
-                        >Name: <strong>{{ item.name }}</strong></v-col
-                      ><v-col
-                        >Room: <strong>{{ item.roomNumber }}</strong></v-col
-                      ><v-col
-                        >Date:
-                        <strong>{{
-                          dayjs(item.date).format('DD/MM/YYYY')
-                        }}</strong></v-col
-                      >
-                      <v-col
-                        >Description:
-                        <strong>{{ item.description }}</strong></v-col
-                      ></v-row
-                    ><v-row
-                      ><v-col
-                        >Time:
-                        <v-chip
-                          v-for="t in item.times"
-                          :key="t"
-                          label
-                          outlined
-                          class="ma-1"
-                          color="primary"
-                          >{{ t }}</v-chip
-                        >
-                      </v-col></v-row
-                    ></v-col
-                  ><v-col cols="1" class="text-end"
-                    ><v-btn
-                      text
-                      @click="dialog = true"
-                      outlined
-                      large
-                      color="error"
-                    >
-                      Cancel
-                    </v-btn></v-col
-                  ></v-row
-                >
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-        </v-virtual-scroll>
-      </div>
+    <v-card class="mt-2" min-height="120" max-height="900">
+      <v-card-title>Reservation List</v-card-title>
+      <v-list class="vscroll pt-0" max-height="820" ripple flat
+        ><v-list-item-group>
+          <v-list-item v-for="r in reserved" :key="r" class="list-item">
+            <v-list-item-content>
+              <v-list-item-title
+                ><ReserveScroll :item="r"></ReserveScroll
+              ></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item> </v-list-item-group
+      ></v-list>
     </v-card>
+
     <v-dialog v-model="dialog" width="600px">
       <v-card>
         <v-card-title> Confirm Cancelation </v-card-title>
@@ -72,7 +30,6 @@
     </v-dialog>
     <v-snackbar v-model="snackbar">
       Success!!!
-
       <template v-slot:action="{ attrs }">
         <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
@@ -83,8 +40,9 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import ReserveScroll from './reserve-scroll.vue'
 export default {
+  components: { ReserveScroll },
   data: () => ({
     dialog: false,
     snackbar: false,
@@ -111,15 +69,16 @@ export default {
 
     async getAllReserved() {
       this.reserved = await this.$axios.$get('/reserve/all')
-      console.log(this.reserved)
     },
-    dayjs,
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.item {
-  border-top: 1px solid rgba(22, 22, 22, 0.1);
+.vscroll {
+  overflow-y: scroll;
+}
+.list-item {
+  border-bottom: solid 1px rgba(22, 22, 22, 0.1);
 }
 </style>
