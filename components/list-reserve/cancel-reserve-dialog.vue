@@ -6,11 +6,11 @@
       </v-text-field>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1 " text @click="$emit('closeDialog', false)">
+        <v-btn color="error darken-1" text @click="$emit('closeDialog', false)">
           Close
         </v-btn>
         <v-btn
-          color="blue darken-1"
+          color="primary darken-1"
           text
           @click="$emit('confirmDialog', false)"
         >
