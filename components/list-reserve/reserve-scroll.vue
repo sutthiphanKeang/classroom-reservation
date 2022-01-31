@@ -20,13 +20,13 @@
         <v-col align-self="center">
           Time:
           <v-chip
-            v-for="t in item.times"
-            :key="t"
+            v-for="(i, index) in item.times"
+            :key="index"
             label
             outlined
             class="ml-1"
             color="primary"
-            >{{ t }}
+            >{{ i }}
           </v-chip>
         </v-col>
         <v-col cols="3" align-self="center">
@@ -35,7 +35,13 @@
       </v-row>
     </v-col>
     <v-col cols="1" class="text-end" align-self="center">
-      <v-btn text @click="dialog = true" outlined large color="error">
+      <v-btn
+        text
+        @click="$emit('cancel', item._ids)"
+        outlined
+        large
+        color="error"
+      >
         Cancel
       </v-btn>
     </v-col>
@@ -50,9 +56,7 @@ export default {
   props: {
     item: Object,
   },
-  mounted() {
-    console.log(this.item)
-  },
+
   methods: {
     dayjs,
   },

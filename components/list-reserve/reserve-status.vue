@@ -15,7 +15,7 @@
 export default {
   props: {
     status: Boolean,
-    date: Date,
+    date: String,
   },
 
   methods: {

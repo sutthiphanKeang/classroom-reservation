@@ -4,30 +4,24 @@
       <v-card-title>Reservation List</v-card-title>
       <v-list class="vscroll pt-0" max-height="820" ripple flat
         ><v-list-item-group>
-          <v-list-item v-for="r in reserved" :key="r" class="list-item">
+          <v-list-item
+            v-for="(r, index) in reserved"
+            :key="index"
+            class="list-item"
+          >
             <v-list-item-content>
               <v-list-item-title
-                ><ReserveScroll :item="r"></ReserveScroll
+                ><ReserveScroll :item="r" @cancel="getCancel"></ReserveScroll
               ></v-list-item-title>
             </v-list-item-content>
           </v-list-item> </v-list-item-group
       ></v-list>
     </v-card>
-
-    <v-dialog v-model="dialog" width="600px">
-      <v-card>
-        <v-card-title> Confirm Cancelation </v-card-title>
-        <v-text-field label="Password" outlined dense class="pa-4">
-        </v-text-field>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1 " text @click="dialog = false">
-            Close
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="confirm()"> Confirm </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <CancelReserveDialog
+      :dialog="dialog"
+      @closeDialog="close"
+      @confirmDialog="confirm"
+    />
     <v-snackbar v-model="snackbar">
       Success!!!
       <template v-slot:action="{ attrs }">
@@ -41,11 +35,13 @@
 
 <script>
 import ReserveScroll from './reserve-scroll.vue'
+import CancelReserveDialog from './cancel-reserve-dialog.vue'
 export default {
-  components: { ReserveScroll },
+  components: { ReserveScroll, CancelReserveDialog },
   data: () => ({
-    dialog: false,
     snackbar: false,
+    dialog: false,
+    id: [],
     time: [
       '08.00-9.30',
       '09.30-11.00',
@@ -69,6 +65,21 @@ export default {
 
     async getAllReserved() {
       this.reserved = await this.$axios.$get('/reserve/all')
+    },
+
+    getCancel(value) {
+      this.ids = value
+      this.dialog = true
+    },
+
+    close(value) {
+      this.cancel = value
+      this.dialog = false
+    },
+
+    confirm(value) {
+      this.ids = value
+      this.dialog = false
     },
   },
 }
