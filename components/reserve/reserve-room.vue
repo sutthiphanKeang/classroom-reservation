@@ -24,7 +24,7 @@
         @close="close"
       />
       <v-snackbar v-model="snackbar">
-        {{ snackbarMessage }}
+        {{ snackbarMessege }}
         <template v-slot:action="{ attrs }">
           <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
             Close
@@ -44,7 +44,7 @@ export default {
     dialog: false,
     menu: false,
     snackbar: false,
-    snackbarMessage: '',
+    snackbarMessege: '',
     date: null,
     focusRoomId: '',
     rooms: [],
@@ -65,7 +65,7 @@ export default {
 
     async createReserve(reaserveData) {
       const reserveResult = await this.$axios.$post('/reserve', reaserveData)
-      this.snackbarMessage = reserveResult
+      this.snackbarMessege = reserveResult
     },
 
     async getAllRooms() {

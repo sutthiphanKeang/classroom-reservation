@@ -41,6 +41,7 @@
         outlined
         large
         color="error"
+        :disabled="item.cancelled"
       >
         Cancel
       </v-btn>

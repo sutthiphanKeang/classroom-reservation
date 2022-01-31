@@ -17,13 +17,9 @@
           </v-list-item> </v-list-item-group
       ></v-list>
     </v-card>
-    <CancelReserveDialog
-      :dialog="dialog"
-      @closeDialog="close"
-      @confirmDialog="confirm"
-    />
+    <CancelReserveDialog :dialog="dialog" @close="close" @confirm="confirm" />
     <v-snackbar v-model="snackbar">
-      Success!!!
+      {{ snackbarMessege }}
       <template v-slot:action="{ attrs }">
         <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
@@ -40,8 +36,8 @@ export default {
   components: { ReserveScroll, CancelReserveDialog },
   data: () => ({
     snackbar: false,
+    snackbarMessege: '',
     dialog: false,
-    id: [],
     time: [
       '08.00-9.30',
       '09.30-11.00',
@@ -51,6 +47,7 @@ export default {
       '15.30-17.00',
     ],
     reserved: [],
+    ids: [],
   }),
 
   mounted() {
@@ -58,28 +55,31 @@ export default {
   },
 
   methods: {
-    confirm() {
-      this.snackbar = true
-      this.dialog = false
-    },
-
-    async getAllReserved() {
-      this.reserved = await this.$axios.$get('/reserve/all')
-    },
-
     getCancel(value) {
       this.ids = value
       this.dialog = true
     },
 
     close(value) {
-      this.cancel = value
-      this.dialog = false
+      this.dialog = value
     },
 
-    confirm(value) {
-      this.ids = value
+    async confirm(value) {
+      this.snackbar = false
+      const data = { password: value, _ids: this.ids }
+      await this.cancelReserves(data)
       this.dialog = false
+      this.snackbar = true
+    },
+
+    async getAllReserved() {
+      this.reserved = await this.$axios.$get('/reserve/all')
+    },
+
+    async cancelReserves(data) {
+      const cancelResult = await this.$axios.$put('/reserve/cancel', data)
+      this.snackbarMessege = cancelResult
+      await this.getAllReserved()
     },
   },
 }
