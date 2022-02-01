@@ -2,7 +2,7 @@
   <div>
     <v-card class="mt-2" min-height="120" max-height="900">
       <v-card-title>Classroom List</v-card-title>
-      <v-list class="vscroll pt-0" max-height="820" ripple flat
+      <v-list class="vscroll pt-0" max-height="820" max-width="100%" ripple flat
         ><v-list-item-group>
           <v-list-item
             v-for="(r, index) in rooms"

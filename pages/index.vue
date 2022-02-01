@@ -1,15 +1,15 @@
 <template>
-  <v-container fluid>
-    <v-row class="block1">
-      <v-col cols="3">
+  <v-container class="idx">
+    <v-row class="wellcome">
+      <v-col cols="3" align-self="center">
         <home-calendar />
       </v-col>
-      <v-col align-self = 'center'>
+      <v-col align-self="center">
         <home-kinesis />
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
+    <v-row class="contact">
+      <v-col align-self="end">
         <home-contact />
       </v-col>
     </v-row>
@@ -20,4 +20,14 @@
 export default {}
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.idx {
+  height: 100%;
+}
+.contact {
+  height: 15%;
+}
+.wellcome {
+  height: 85%;
+}
+</style>
