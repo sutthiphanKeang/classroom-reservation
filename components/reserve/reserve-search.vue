@@ -1,8 +1,9 @@
 <template>
-  <v-container  >
+  <v-container>
     <v-row>
       <v-col align-self="center">
         <v-text-field
+          v-model="searchData.number"
           label="Room"
           outlined
           dense
@@ -14,7 +15,6 @@
       <v-col align-self="center"
         ><v-menu
           ref="menu"
-          v-model="menu"
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
@@ -22,6 +22,7 @@
           <template #activator="{ on, attrs }">
             <v-text-field
               label="Date"
+              v-model="searchData.date"
               append-icon="mdi-calendar"
               outlined
               dense
@@ -33,6 +34,7 @@
           </template>
           <v-date-picker
             ref="picker"
+            v-model="searchData.date"
             :min="dayjs().add(1, 'day').toISOString().substr(0, 10)"
           ></v-date-picker>
         </v-menu>
@@ -41,6 +43,7 @@
       <v-col align-self="center">
         <v-select
           :items="time"
+          v-model="searchData.time"
           append-icon="mdi-clock"
           menu-props="auto"
           hide-details
@@ -52,6 +55,7 @@
       <v-col>
         <v-select
           :items="type"
+          v-model="searchData.type"
           menu-props="auto"
           hide-details
           label="Type"
@@ -62,32 +66,42 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn color="primary" width="100%" text-align="center">
+        <v-btn
+          color="primary"
+          width="100%"
+          text-align="center"
+          @click="$emit('search', searchData)"
+        >
           Search
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-col>
     </v-row>
-
-    <ReserveRoom class="mt-7" />
   </v-container>
 </template>
 
 <script>
-import ReserveRoom from './reserve-room.vue'
 import dayjs from 'dayjs'
 export default {
-  components: { ReserveRoom },
   data: () => ({
     time: [
-      '08.00-09.30',
-      '09.30-11.00',
-      '11.00-12.30',
-      '12.30-14.00',
-      '14.00-15.30',
-      '15.30-17.00',
+      { text: '08.00 - 09.30', value: { start: '8.00', end: '9.30' } },
+      { text: '09.30 - 11.00', value: { start: '9.30', end: '11.00' } },
+      { text: '11.00 - 12.30', value: { start: '11.00', end: '12.30' } },
+      { text: '12.30 - 14.00', value: { start: '12.30', end: '14.00' } },
+      { text: '14.00 - 15.30', value: { start: '14.00', end: '15.30' } },
+      { text: '15.30 - 17.00', value: { start: '15.30', end: '17.00' } },
     ],
-    type: ['Lecture', 'Laboratory'],
+    searchData: {
+      date: null,
+      number: null,
+      time: null,
+      type: null,
+    },
+    type: [
+      { text: 'Lecture', value: 0 },
+      { text: 'Laboratory', value: 1 },
+    ],
   }),
   computed: {
     items() {

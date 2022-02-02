@@ -183,10 +183,9 @@ export default {
       }
     },
     async getFreeTime() {
-      this.freeTime = await this.$axios.$get('/reserve/freeTime', {
-        id: this.focusRoomId,
-        date: this.date,
-      })
+      this.freeTime = await this.$axios.$get(
+        `/reserve/freeTime/${this.focusRoomId}/${this.date}`
+      )
     },
     dayjs,
   },

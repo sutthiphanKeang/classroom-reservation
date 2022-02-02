@@ -86,14 +86,6 @@ export default {
       '15.30-17.00',
     ],
   }),
-  computed: {
-    items() {
-      return Array.from({ length: this.length }, (k, v) => v + 1)
-    },
-    length() {
-      return 20
-    },
-  },
 }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ReserveSearch @search="search" />
     <v-card class="mt-2" min-height="120" max-height="900">
       <v-card-title>Classroom List</v-card-title>
       <v-list class="vscroll pt-0" max-height="820" max-width="100%" ripple flat
@@ -11,7 +12,10 @@
           >
             <v-list-item-content>
               <v-list-item-title
-                ><RoomDetails :item="r" @reserving="setFocusData"
+                ><RoomDetails
+                  :item="r"
+                  @reserving="setFocusData"
+                  class="room-details"
               /></v-list-item-title>
             </v-list-item-content>
           </v-list-item> </v-list-item-group
@@ -36,10 +40,11 @@
 </template>
 
 <script>
+import ReserveSearch from './reserve-search.vue'
 import RoomDetails from './room-details.vue'
 import RoomDialog from './room-dialog.vue'
 export default {
-  components: { RoomDetails, RoomDialog },
+  components: { RoomDetails, RoomDialog, ReserveSearch },
   data: () => ({
     dialog: false,
     menu: false,
@@ -72,6 +77,12 @@ export default {
       this.rooms = await this.$axios.$get('/rooms/all')
     },
 
+    async search(value) {
+      this.rooms = await this.$axios.$get(
+        `/rooms/search/${value.number}/${value.date}/${value.time?.start}/${value.time?.end}/${value.type}`
+      )
+    },
+
     close(value) {
       this.dialog = value
     },
@@ -89,5 +100,8 @@ export default {
 }
 .list-item {
   border-bottom: solid 1px rgba(22, 22, 22, 0.1);
+}
+.room-details {
+  width: 98%;
 }
 </style>

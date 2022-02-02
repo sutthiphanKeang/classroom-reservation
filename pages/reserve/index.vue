@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid class="box">
-    <reserve-search />
+  <v-container>
+    <reserve-room />
   </v-container>
 </template>
 
