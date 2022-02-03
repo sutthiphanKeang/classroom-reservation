@@ -47,7 +47,7 @@ export default {
       '15.30-17.00',
     ],
     reserved: [],
-    ids: [],
+    _id: '',
   }),
 
   mounted() {
@@ -56,7 +56,7 @@ export default {
 
   methods: {
     getCancel(value) {
-      this.ids = value
+      this._id = value
       this.dialog = true
     },
 
@@ -66,7 +66,7 @@ export default {
 
     async confirm(value) {
       this.snackbar = false
-      const data = { password: value, _ids: this.ids }
+      const data = { password: value, _id: this._id }
       await this.cancelReserves(data)
       this.dialog = false
       this.snackbar = true
@@ -74,6 +74,7 @@ export default {
 
     async getAllReserved() {
       this.reserved = await this.$axios.$get('/reserve/all')
+      console.log(this.reserved)
     },
 
     async cancelReserves(data) {

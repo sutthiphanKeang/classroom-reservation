@@ -175,7 +175,7 @@ export default {
         roomId: this.focusRoomId,
         by: `${this.firstName} ${this.lastName}`,
         date: this.date,
-        time: this.selectedTime,
+        periods: this.selectedTime,
         description: this.description,
         password: this.password,
         phone: this.phone,

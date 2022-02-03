@@ -20,13 +20,13 @@
         <v-col align-self="center">
           Time:
           <v-chip
-            v-for="(i, index) in item.times"
+            v-for="(i, index) in item.periods"
             :key="index"
             label
             outlined
             class="ml-1"
             color="primary"
-            >{{ i }}
+            >{{ i.start }} - {{ i.end }}
           </v-chip>
         </v-col>
         <v-col cols="3" align-self="center">
@@ -37,7 +37,7 @@
     <v-col cols="1" class="text-end" align-self="center">
       <v-btn
         text
-        @click="$emit('cancel', item._ids)"
+        @click="$emit('cancel', item._id)"
         outlined
         large
         color="error"
