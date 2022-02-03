@@ -78,8 +78,16 @@ export default {
     },
 
     async search(value) {
+      const data = {
+        number: value.number == '' || valuenumber == null ? null : value.number,
+        date: value.date == '' || value.date == null ? null : value.date,
+        start:
+          value.time == '' || value.time == null ? null : value.time?.start,
+        end: value.time == '' || value.time == null ? null : value.time?.end,
+        type: value.type == '' || value.type == null ? null : value.type,
+      }
       this.rooms = await this.$axios.$get(
-        `/rooms/search/${value.number}/${value.date}/${value.time?.start}/${value.time?.end}/${value.type}`
+        `/rooms/search/${data.number}/${data.date}/${data.start}/${data.end}/${data.type}`
       )
     },
 
