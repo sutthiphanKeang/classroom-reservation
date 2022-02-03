@@ -81,12 +81,16 @@ export default {
       const data = {
         number:
           value.number == '' || value.number == null ? null : value.number,
-        date: value.date == '' || value.date == null ? null : value.date,
+        date:
+          value.date == '' || value.date == null
+            ? null
+            : new Date(value.date).toISOString(),
         start:
           value.time == '' || value.time == null ? null : value.time?.start,
         end: value.time == '' || value.time == null ? null : value.time?.end,
         type: value.type == '' || value.type == null ? null : value.type,
       }
+
       this.rooms = await this.$axios.$get(
         `/rooms/search/${data.number}/${data.date}/${data.start}/${data.end}/${data.type}`
       )
