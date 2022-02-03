@@ -79,7 +79,8 @@ export default {
 
     async search(value) {
       const data = {
-        number: value.number == '' || valuenumber == null ? null : value.number,
+        number:
+          value.number == '' || value.number == null ? null : value.number,
         date: value.date == '' || value.date == null ? null : value.date,
         start:
           value.time == '' || value.time == null ? null : value.time?.start,
