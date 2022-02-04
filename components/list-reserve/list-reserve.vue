@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row>
       <v-col align-self="center">
         <v-text-field
@@ -8,6 +8,7 @@
           dense
           hide-details
           append-icon="mdi-account"
+          v-model="searchReserve.name"
         ></v-text-field>
       </v-col>
       <v-col align-self="center">
@@ -17,6 +18,7 @@
           dense
           hide-details
           append-icon="mdi-google-classroom"
+          v-model="searchReserve.number"
         ></v-text-field>
       </v-col>
 
@@ -38,6 +40,7 @@
               v-bind="attrs"
               v-on="on"
               hide-details
+              v-model="searchReserve.date"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -57,6 +60,7 @@
           label="Time"
           outlined
           dense
+          v-model="searchReserve.time"
         ></v-select>
       </v-col>
     </v-row>
@@ -65,6 +69,18 @@
         <v-btn color="primary" width="100%" text-align="center">
           Search
           <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+          color="secondary"
+          width="100%"
+          text-align="center"
+          outlined
+          @click="clear"
+        >
+          Clear
+          <v-icon>mdi-trash-can-outline </v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -78,14 +94,21 @@ export default {
   components: { DataRoom },
   data: () => ({
     time: [
-      '08.00-9.30',
-      '09.30-11.00',
-      '11.00-12.30',
-      '12.30-14.00',
-      '14.00-15.30',
-      '15.30-17.00',
+      { text: '08.00 - 09.30', value: { start: '8.00', end: '9.30' } },
+      { text: '09.30 - 11.00', value: { start: '9.30', end: '11.00' } },
+      { text: '11.00 - 12.30', value: { start: '11.00', end: '12.30' } },
+      { text: '12.30 - 14.00', value: { start: '12.30', end: '14.00' } },
+      { text: '14.00 - 15.30', value: { start: '14.00', end: '15.30' } },
+      { text: '15.30 - 17.00', value: { start: '15.30', end: '17.00' } },
     ],
+    searchReserve:{
+      name: null,
+      number: null,
+      date: null,
+      period: null,
+    }
   }),
+
 }
 </script>
 

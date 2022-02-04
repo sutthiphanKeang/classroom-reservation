@@ -76,6 +76,18 @@
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </v-col>
+      <v-col>
+        <v-btn
+          color="secondary"
+          width="100%"
+          text-align="center"
+          outlined
+          @click="clear"
+        >
+          Clear
+          <v-icon>mdi-trash-can-outline </v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -112,6 +124,15 @@ export default {
     },
   },
   methods: {
+    clear() {
+      this.searchData = {
+        date: null,
+        number: null,
+        time: null,
+        type: null,
+      }
+      this.$emit('clear')
+    },
     dayjs,
   },
 }

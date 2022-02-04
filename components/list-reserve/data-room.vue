@@ -1,8 +1,16 @@
 <template>
   <div>
-    <v-card class="mt-2" min-height="120" max-height="900">
+    <v-card class="mt-2" min-height="120" max-height="720">
       <v-card-title>Reservation List</v-card-title>
-      <v-list class="vscroll pt-0" max-height="820" max-width="100%" ripple flat
+      <div v-if="loading == true" class="d-flex justify-center">
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
+      </div>
+      <v-list v-else class="vscroll pt-0" max-height="650" max-width="100%" ripple flat
         ><v-list-item-group>
           <v-list-item
             v-for="(r, index) in reserved"
@@ -35,6 +43,7 @@ import CancelReserveDialog from './cancel-reserve-dialog.vue'
 export default {
   components: { ReserveScroll, CancelReserveDialog },
   data: () => ({
+    loading: false,
     snackbar: false,
     snackbarMessege: '',
     dialog: false,
@@ -73,8 +82,9 @@ export default {
     },
 
     async getAllReserved() {
+      this.loading = true
       this.reserved = await this.$axios.$get('/reserve/all')
-      console.log(this.reserved)
+      this.loading = false
     },
 
     async cancelReserves(data) {

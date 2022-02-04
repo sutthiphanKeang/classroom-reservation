@@ -1,9 +1,17 @@
 <template>
   <div>
-    <ReserveSearch @search="search" />
-    <v-card class="mt-2" min-height="120" max-height="900">
+    <ReserveSearch @search="search" @clear="clear" />
+    <v-card class="mt-2" min-height="120" max-height="720">
       <v-card-title>Classroom List</v-card-title>
-      <v-list class="vscroll pt-0" max-height="820" max-width="100%" ripple flat
+      <div v-if="loading == true" class="d-flex justify-center">
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
+      </div>
+      <v-list v-else class="vscroll pt-0" max-height="650" max-width="100%" ripple flat
         ><v-list-item-group>
           <v-list-item
             v-for="(r, index) in rooms"
@@ -46,6 +54,7 @@ import RoomDialog from './room-dialog.vue'
 export default {
   components: { RoomDetails, RoomDialog, ReserveSearch },
   data: () => ({
+    loading: false,
     dialog: false,
     menu: false,
     snackbar: false,
@@ -60,6 +69,9 @@ export default {
   },
 
   methods: {
+    async clear() {
+      await this.getAllRooms()
+    },
     async sendReserve(data) {
       await this.createReserve(data)
       this.dialog = false
@@ -74,7 +86,9 @@ export default {
     },
 
     async getAllRooms() {
+      this.loading = true
       this.rooms = await this.$axios.$get('/rooms/all')
+      this.loading = false
     },
 
     async search(value) {
