@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-bind:style="{ backgroundColor: color}">
     <v-toolbar app class="flex-grow-0 pr-0" dark>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">
@@ -38,8 +38,11 @@ export default {
         icon: 'mdi-format-list-bulleted',
       },
     ],
+    color: '#F5F5F5'
   }),
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+ 
+</style>
