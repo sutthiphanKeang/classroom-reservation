@@ -199,7 +199,9 @@ export default {
     ],
     dateRules: [(v) => !!v || 'Date is required!'],
     timeRules: [(v) => (v && v.length >= 1) || 'Time is required!'],
-    passwordRules: [(v) => !!v || 'Password is required!'],
+    passwordRules: [(v) => !!v || 'Password is required!',
+    (v) => (v && v.length >= 8) || 'Last name must be more than 8 characters',
+    (v) => (v && v.length <= 16) || 'Last name must be less than 16 characters'],
   }),
   watch: {
     date(next) {
