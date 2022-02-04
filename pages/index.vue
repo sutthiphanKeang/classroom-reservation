@@ -1,6 +1,6 @@
 <template>
   <v-container class="idx">
-    <v-row class="wellcome">
+    <v-row class="welcome">
       <v-col cols="3" align-self="center">
         <home-calendar />
       </v-col>
@@ -25,9 +25,9 @@ export default {}
   height: 100%;
 }
 .contact {
-  height: 15%;
+  height: 30%;
 }
-.wellcome {
-  height: 85%;
+.welcome {
+  height: 70%;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="box">
+    <div class="box mt-n16 mb-6">
       <div class="LCD d-flex justify-center">
         <div class="hours">{{ hours }}</div>
         <div class="divider">:</div>
@@ -9,23 +9,21 @@
         <div class="seconds">{{ seconds }}</div>
       </div>
     </div>
-    <v-date-picker v-model="picker" dark full-width></v-date-picker>
+    <v-date-picker class ="d-flex align-self-end" v-model="picker" dark full-width></v-date-picker>
 
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
+  data: () => ({
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
       hours: 0,
       minutes: 0,
       seconds: 0,
-    }
-  },
+  }),
   mounted() {
     setInterval(() => this.setTime(), 1000)
   },
@@ -58,7 +56,5 @@ export default {
   background-color: rgba(0, 0, 0, 0.75);
   border: 1px solid darkgrey;
   border-radius: 7px;
-  margin-bottom: 15px;
-  margin-top: 8px;
 }
 </style>
