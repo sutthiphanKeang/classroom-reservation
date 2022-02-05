@@ -1,5 +1,5 @@
 <template>
-  <v-card dark>
+  <v-card dark class="card align-self-end">
     <v-card-title class="d-flex justify-center"> Contact </v-card-title>
     <v-card-text class="text-center">
       <table class="name">
@@ -34,5 +34,9 @@ th {
   text-align: center;
   padding-right: 14px;
   margin: auto;
+}
+.card{
+  margin-top: 90px;
+  height: 75%;
 }
 </style>

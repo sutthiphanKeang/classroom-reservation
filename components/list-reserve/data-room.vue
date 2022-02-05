@@ -32,7 +32,7 @@
           </v-list-item> </v-list-item-group
       ></v-list>
     </v-card>
-    <CancelReserveDialog :dialog="dialog" @close="close" @confirm="confirm" />
+    <CancelReserveDialog :dialog="dialog" @close="close" @confirm="confirm" :error="error" :errorMessage="errorMessage" />
     <v-snackbar v-model="snackbar">
       {{ snackbarMessege }}
       <template v-slot:action="{ attrs }">
@@ -51,6 +51,8 @@ import CancelReserveDialog from './cancel-reserve-dialog.vue'
 export default {
   components: { ReserveScroll, CancelReserveDialog, ListReserve },
   data: () => ({
+    error: false,
+    errorMessage: '',
     loading: false,
     snackbar: false,
     snackbarMessege: '',
@@ -78,6 +80,8 @@ export default {
     },
 
     close(value) {
+      this.error = false
+      this.errorMessage = ''
       this.dialog = value
     },
 
@@ -104,8 +108,7 @@ export default {
       this.snackbar = false
       const data = { password: value, _id: this._id }
       await this.cancelReserves(data)
-      this.dialog = false
-      this.snackbar = true
+
     },
 
     async getAllReserved() {
@@ -116,7 +119,6 @@ export default {
 
     async searchRoom(data) {
       this.loading = true
-      console.log(data)
       this.reserved = await this.$axios.$get(
         `/reserve/search/${data.name}/${data.number}/${data.date}/${data.start}/${data.end}`
       )
@@ -125,8 +127,17 @@ export default {
 
     async cancelReserves(data) {
       const cancelResult = await this.$axios.$put('/reserve/cancel', data)
+      if(cancelResult.includes("Fail")){
+        this.errorMessage = cancelResult
+        this.error = true
+        return
+
+      }
       this.snackbarMessege = cancelResult
+      this.dialog = false
+      this.snackbar = true
       await this.getAllReserved()
+      
     },
   },
 }

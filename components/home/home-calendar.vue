@@ -1,28 +1,35 @@
 <template>
-  <div>
-    <div class="box mt-n16 mb-6">
-      <div class="LCD d-flex justify-center">
-        <div class="hours">{{ hours }}</div>
-        <div class="divider">:</div>
-        <div class="minutes">{{ minutes }}</div>
-        <div class="divider">:</div>
-        <div class="seconds">{{ seconds }}</div>
+  <v-row>
+    <v-col cols="12">
+      <div class="box">
+        <div class="LCD d-flex justify-center">
+          <div class="hours">{{ hours }}</div>
+          <div class="divider">:</div>
+          <div class="minutes">{{ minutes }}</div>
+          <div class="divider">:</div>
+          <div class="seconds">{{ seconds }}</div>
+        </div>
       </div>
-    </div>
-    <v-date-picker class ="d-flex align-self-end" v-model="picker" dark full-width></v-date-picker>
-
-  </div>
+    </v-col>
+    <v-col class="mt-16" cols="12" align-self= "end">
+      <v-date-picker
+        v-model="picker"
+        dark
+        full-width
+      ></v-date-picker>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 export default {
   data: () => ({
-      picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
+    picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   }),
   mounted() {
     setInterval(() => this.setTime(), 1000)
@@ -57,4 +64,5 @@ export default {
   border: 1px solid darkgrey;
   border-radius: 7px;
 }
+
 </style>

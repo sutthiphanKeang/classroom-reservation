@@ -9,7 +9,7 @@
       </v-col>
     </v-row>
     <v-row class="contact">
-      <v-col align-self="end">
+      <v-col>
         <home-contact />
       </v-col>
     </v-row>
