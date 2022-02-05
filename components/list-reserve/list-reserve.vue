@@ -111,7 +111,17 @@ export default {
     },
   }),
 
-  methods: {},
+  methods: {
+    clear() {
+      this.searchReserve = {
+        name: null,
+        number: null,
+        date: null,
+        period: null,
+      }
+      this.$emit('clear')
+    },
+  },
 }
 </script>
 

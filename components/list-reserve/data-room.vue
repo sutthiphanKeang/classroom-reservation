@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ListReserve @search="search" />
+    <ListReserve @search="search" @clear="clear" />
     <v-card class="mt-2" min-height="120" max-height="720">
       <v-card-title>Reservation List</v-card-title>
       <div v-if="loading == true" class="d-flex justify-center">
@@ -96,7 +96,10 @@ export default {
       }
       this.searchRoom(data)
     },
-
+    clear() {
+      this.getAllReserved()
+    },
+    
     async confirm(value) {
       this.snackbar = false
       const data = { password: value, _id: this._id }
