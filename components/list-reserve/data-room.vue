@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ListReserve @search="search" />
     <v-card class="mt-2" min-height="120" max-height="720">
       <v-card-title>Reservation List</v-card-title>
       <div v-if="loading == true" class="d-flex justify-center">
@@ -10,7 +11,13 @@
           indeterminate
         ></v-progress-circular>
       </div>
-      <v-list v-else class="vscroll pt-0" max-height="650" max-width="100%" ripple flat
+      <v-list
+        v-else
+        class="vscroll pt-0"
+        max-height="650"
+        max-width="100%"
+        ripple
+        flat
         ><v-list-item-group>
           <v-list-item
             v-for="(r, index) in reserved"
@@ -38,10 +45,11 @@
 </template>
 
 <script>
+import ListReserve from './list-reserve.vue'
 import ReserveScroll from './reserve-scroll.vue'
 import CancelReserveDialog from './cancel-reserve-dialog.vue'
 export default {
-  components: { ReserveScroll, CancelReserveDialog },
+  components: { ReserveScroll, CancelReserveDialog, ListReserve },
   data: () => ({
     loading: false,
     snackbar: false,
@@ -73,6 +81,22 @@ export default {
       this.dialog = value
     },
 
+    search(value) {
+      const data = {
+        name: value.name == '' || value.name == null ? null : value.name,
+        number:
+          value.number == '' || value.number == null ? null : value.number,
+        date:
+          value.date == '' || value.date == null
+            ? null
+            : new Date(value.date).toISOString(),
+        start:
+          value.time == '' || value.time == null ? null : value.time?.start,
+        end: value.time == '' || value.time == null ? null : value.time?.end,
+      }
+      this.searchRoom(data)
+    },
+
     async confirm(value) {
       this.snackbar = false
       const data = { password: value, _id: this._id }
@@ -84,6 +108,15 @@ export default {
     async getAllReserved() {
       this.loading = true
       this.reserved = await this.$axios.$get('/reserve/all')
+      this.loading = false
+    },
+
+    async searchRoom(data) {
+      this.loading = true
+      console.log(data)
+      this.reserved = await this.$axios.$get(
+        `/reserve/search/${data.name}/${data.number}/${data.date}/${data.start}/${data.end}`
+      )
       this.loading = false
     },
 

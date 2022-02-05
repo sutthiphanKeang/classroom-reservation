@@ -66,7 +66,12 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn color="primary" width="100%" text-align="center">
+        <v-btn
+          color="primary"
+          width="100%"
+          text-align="center"
+          @click="$emit('search', searchReserve)"
+        >
           Search
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
@@ -84,14 +89,11 @@
         </v-btn>
       </v-col>
     </v-row>
-    <DataRoom class="mt-7" />
   </v-container>
 </template>
 
 <script>
-import DataRoom from './data-room.vue'
 export default {
-  components: { DataRoom },
   data: () => ({
     time: [
       { text: '08.00 - 09.30', value: { start: '8.00', end: '9.30' } },
@@ -101,14 +103,15 @@ export default {
       { text: '14.00 - 15.30', value: { start: '14.00', end: '15.30' } },
       { text: '15.30 - 17.00', value: { start: '15.30', end: '17.00' } },
     ],
-    searchReserve:{
+    searchReserve: {
       name: null,
       number: null,
       date: null,
       period: null,
-    }
+    },
   }),
 
+  methods: {},
 }
 </script>
 
